@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_codepur/utils/routes.dart';
+import 'package:flutter_application_codepur/widgets/drawer.dart';
 
 class Homepage extends StatelessWidget {
   final int days = 31;
@@ -60,7 +61,7 @@ class Homepage extends StatelessWidget {
           ],
         ),
       ),
-      drawer: Drawer(),
+      drawer: MyDrawer(),
     );
   }
 }
