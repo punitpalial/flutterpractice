@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_codepur/models/catalog.dart';
 import 'package:flutter_application_codepur/utils/routes.dart';
 import 'package:flutter_application_codepur/widgets/drawer.dart';
+import 'package:flutter_application_codepur/widgets/item_widget.dart';
 
 class Homepage extends StatelessWidget {
   final int days = 31;
@@ -8,6 +10,7 @@ class Homepage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final dummyList = List.generate(50, (index) => CatalogModel.items[0]);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -24,53 +27,15 @@ class Homepage extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      body: Center(
-        child: Column(
-          children: [
-            SizedBox(
-              height: 30.0,
-            ),
-            Text(
-              'You have been blessed by the BONK! God Hurrrrrrrrrrrrrray',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: Colors.red,
-                backgroundColor: Colors.yellow,
-              ),
-            ),
-            SizedBox(
-              height: 30.0,
-            ),
-            Image.asset(
-              "assets/images/bonk.jpg",
-              //fit: BoxFit.cover,
-              height: 200,
-            ),
-            SizedBox(
-              height: 10.0,
-            ),
-            Text(
-              'BONK!',
-              style: TextStyle(
-                fontSize: 40,
-                fontWeight: FontWeight.bold,
-                color: Colors.red,
-              ),
-            ),
-            SizedBox(
-              height: 10.0,
-            ),
-            ElevatedButton(
-              child: Text('Back'),
-              style: TextButton.styleFrom(minimumSize: Size(150, 40)),
-              onPressed: () {
-                Navigator.pushNamed(context, MyRoutes.loginRoute);
-              },
-            ),
-          ],
-        ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: ListView.builder(
+            itemCount: dummyList.length,
+            itemBuilder: (context, index) {
+              return ItemWidget(
+                item: dummyList[index],
+              );
+            }),
       ),
       drawer: MyDrawer(),
     );
