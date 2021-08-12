@@ -59,12 +59,47 @@ class _HomepageState extends State<Homepage> {
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: (CatalogModel.items != null && CatalogModel.items.isNotEmpty)
-            ? ListView.builder(
+            ? GridView.builder(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 10,
+                  crossAxisSpacing: 10,
+                ), //Sliver matlab jo bhi scrollable content hai, uskey andar sliver use hota hai
+                itemBuilder: (context, index) {
+                  final item = CatalogModel.items[index];
+                  return Card(
+                    clipBehavior: Clip.antiAlias,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30)),
+                    child: GridTile(
+                      header: Container(
+                        child: Text(item.name,
+                            style: TextStyle(color: Colors.black)),
+                        padding: const EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                          color: Colors.black26,
+                        ),
+                      ),
+                      child: Image.network(item.image),
+                      footer: Container(
+                        child: Text(item.price.toString(),
+                            style: TextStyle(color: Colors.white)),
+                        padding: const EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                          color: Colors.black87,
+                        ),
+                      ),
+                    ),
+                  );
+                },
                 itemCount: CatalogModel.items.length,
-                itemBuilder: (context, index) => ItemWidget(
-                  item: CatalogModel.items[index],
-                ),
               )
+            // ListView.builder(
+            //     itemCount: CatalogModel.items.length,
+            //     itemBuilder: (context, index) => ItemWidget(
+            //       item: CatalogModel.items[index],
+            //     ),
+            //   )
             : Center(
                 child: CircularProgressIndicator(),
               ),
