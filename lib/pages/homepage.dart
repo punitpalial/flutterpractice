@@ -1,10 +1,14 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_application_codepur/models/catalog.dart';
 import 'package:flutter_application_codepur/utils/routes.dart';
 import 'package:flutter_application_codepur/widgets/drawer.dart';
 import 'package:flutter_application_codepur/widgets/item_widget.dart';
+import 'package:flutter_application_codepur/widgets/themes.dart';
 import 'dart:convert';
+import 'package:velocity_x/velocity_x.dart';
 
 class Homepage extends StatefulWidget {
   @override
@@ -41,70 +45,184 @@ class _HomepageState extends State<Homepage> {
   Widget build(BuildContext context) {
     //ab dummy ke 50 iphone ki zarurat nahi:=> // final dummyList = List.generate(50, (index) => CatalogModel.items[0]);
     return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        // elevation: 0.0,
-        // iconTheme: IconThemeData(
-        //   color: Colors.black,
+      backgroundColor: MyTheme.creamColor,
+      // appBar: AppBar(
+      //   backgroundColor: Colors.white,
+      //   // elevation: 0.0,
+      //   // iconTheme: IconThemeData(
+      //   //   color: Colors.black,
 
-        title: Text(
-          "Feed",
-          style: TextStyle(
-            color: Colors.black,
+      //   title: Text(
+      //     "Feed",
+      //     style: TextStyle(
+      //       color: Colors.black,
+      //     ),
+      //   ),
+      //   centerTitle: true,
+      // ),
+      // body: Padding(
+      //   padding: const EdgeInsets.all(16.0),
+      //   child: (CatalogModel.items != null && CatalogModel.items.isNotEmpty)
+      //       ? GridView.builder(
+      //           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+      //             crossAxisCount: 2,
+      //             mainAxisSpacing: 10,
+      //             crossAxisSpacing: 10,
+      //           ), //Sliver matlab jo bhi scrollable content hai, uskey andar sliver use hota hai
+      //           itemBuilder: (context, index) {
+      //             final item = CatalogModel.items[index];
+      //             return Card(
+      //               clipBehavior: Clip.antiAlias,
+      //               shape: RoundedRectangleBorder(
+      //                   borderRadius: BorderRadius.circular(30)),
+      //               child: GridTile(
+      //                 header: Container(
+      //                   child: Text(item.name,
+      //                       style: TextStyle(color: Colors.black)),
+      //                   padding: const EdgeInsets.all(12),
+      //                   decoration: BoxDecoration(
+      //                     color: Colors.black26,
+      //                   ),
+      //                 ),
+      //                 child: Image.network(item.image),
+      //                 footer: Container(
+      //                   child: Text(item.price.toString(),
+      //                       style: TextStyle(color: Colors.white)),
+      //                   padding: const EdgeInsets.all(12),
+      //                   decoration: BoxDecoration(
+      //                     color: Colors.black87,
+      //                   ),
+      //                 ),
+      //               ),
+      //             );
+      //           },
+      //           itemCount: CatalogModel.items.length,
+      //         )
+      //       // ListView.builder(
+      //       //     itemCount: CatalogModel.items.length,
+      //       //     itemBuilder: (context, index) => ItemWidget(
+      //       //       item: CatalogModel.items[index],
+      //       //     ),
+      //       //   )
+      //       : Center(
+      //           child: CircularProgressIndicator(),
+      //         ),
+      // ),
+      // drawer: MyDrawer(),
+
+      body: SafeArea(
+        child: Container(
+          padding: Vx.m32,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              CatalogHeader(),
+              if (CatalogModel.items != null && CatalogModel.items.isNotEmpty)
+                CatalogList().expand()
+              else
+                Center(
+                  child: CircularProgressIndicator(),
+                ),
+            ],
           ),
         ),
-        centerTitle: true,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: (CatalogModel.items != null && CatalogModel.items.isNotEmpty)
-            ? GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 10,
-                  crossAxisSpacing: 10,
-                ), //Sliver matlab jo bhi scrollable content hai, uskey andar sliver use hota hai
-                itemBuilder: (context, index) {
-                  final item = CatalogModel.items[index];
-                  return Card(
-                    clipBehavior: Clip.antiAlias,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30)),
-                    child: GridTile(
-                      header: Container(
-                        child: Text(item.name,
-                            style: TextStyle(color: Colors.black)),
-                        padding: const EdgeInsets.all(12),
-                        decoration: BoxDecoration(
-                          color: Colors.black26,
-                        ),
-                      ),
-                      child: Image.network(item.image),
-                      footer: Container(
-                        child: Text(item.price.toString(),
-                            style: TextStyle(color: Colors.white)),
-                        padding: const EdgeInsets.all(12),
-                        decoration: BoxDecoration(
-                          color: Colors.black87,
-                        ),
+    );
+  }
+}
+
+class CatalogHeader extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        "Catalog App".text.xl5.color(Colors.black87).bold.make(),
+        "Trending Products".text.xl2.make(),
+      ],
+    );
+  }
+}
+
+class CatalogList extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      shrinkWrap: true,
+      itemBuilder: (context, index) {
+        final catalog = CatalogModel.items[index];
+        return CatalogItem(
+          catalog: catalog,
+          key: Key("null"),
+        );
+      },
+      itemCount: CatalogModel.items.length,
+    );
+  }
+}
+
+class CatalogItem extends StatelessWidget {
+  final Item catalog;
+
+  const CatalogItem({required Key key, required this.catalog})
+      : assert(catalog != null),
+        super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return VxBox(
+        child: Row(
+      children: [
+        CatalogImage(
+          image: catalog.image,
+        ),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Padding(
+                padding: EdgeInsets.only(left: 0),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  child: catalog.name.text.xl.bold.make(),
+                ),
+              ),
+              catalog.desc.text.textStyle(context.captionStyle).sm.make(),
+              8.heightBox,
+              ButtonBar(
+                alignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  "\$${catalog.price}".text.xl.bold.make(),
+                  ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(Colors.black),
+                      shape: MaterialStateProperty.all(
+                        StadiumBorder(),
                       ),
                     ),
-                  );
-                },
-                itemCount: CatalogModel.items.length,
+                    onPressed: () {},
+                    child: "Buy".text.make(),
+                  ),
+                ],
               )
-            // ListView.builder(
-            //     itemCount: CatalogModel.items.length,
-            //     itemBuilder: (context, index) => ItemWidget(
-            //       item: CatalogModel.items[index],
-            //     ),
-            //   )
-            : Center(
-                child: CircularProgressIndicator(),
-              ),
-      ),
-      drawer: MyDrawer(),
-    );
+            ],
+          ),
+        )
+      ],
+    )).white.rounded.square(150).make().py16();
+  }
+}
+
+class CatalogImage extends StatelessWidget {
+  final String image;
+
+  const CatalogImage({Key? key, required this.image}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Image.network(
+      image,
+    ).box.p16.rounded.color(MyTheme.creamColor).make().p8().w40(context);
   }
 }
