@@ -1,8 +1,8 @@
-import 'dart:ffi';
-
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_application_codepur/models/catalog.dart';
+import 'package:flutter_application_codepur/utils/routes.dart';
 import 'package:flutter_application_codepur/widgets/home_widgets/catalog_header.dart';
 import 'package:flutter_application_codepur/widgets/home_widgets/catalog_list.dart';
 import 'package:flutter_application_codepur/widgets/themes.dart';
@@ -45,6 +45,26 @@ class _HomepageState extends State<Homepage> {
     //ab dummy ke 50 iphone ki zarurat nahi:=> // final dummyList = List.generate(50, (index) => CatalogModel.items[0]);
     return Scaffold(
       backgroundColor: MyTheme.creamColor,
+
+      bottomNavigationBar: Container(
+        color: Colors.transparent,
+        child: Container(
+          //alignment: Alignment.bottomRight,
+
+          child: Padding(
+            padding: const EdgeInsets.only(bottom: 4.0),
+            child: FloatingActionButton(
+              onPressed: () => Navigator.pushNamed(context, MyRoutes.cartRoute),
+              backgroundColor: Colors.black,
+              child: Icon(
+                CupertinoIcons.cart,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ),
+      ),
+
       // appBar: AppBar(
       //   backgroundColor: Colors.white,
       //   // elevation: 0.0,

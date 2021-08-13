@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_application_codepur/models/catalog.dart';
 import 'package:flutter_application_codepur/widgets/themes.dart';
 import 'package:matcher/matcher.dart';
@@ -58,7 +59,7 @@ class HomeDetailPage extends StatelessWidget {
             children: [
               Center(
                 child: Container(
-                        height: 400,
+                        height: 350,
                         //width: 300,
                         //width: context.screenWidth,
                         child: Hero(
@@ -92,8 +93,25 @@ class HomeDetailPage extends StatelessWidget {
                         catalog.desc.text
                             .color(Colors.white)
                             .textStyle(context.captionStyle)
-                            .lg
+                            .size(20)
                             .make(),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 30),
+                          child: Divider(
+                            color: Colors.white,
+                          ),
+                        ),
+                        Container(
+                          child: Padding(
+                            padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
+                            child: Text(
+                              "Dunno if you are still stuck but I found a workarounfrom the appBar slot of the Scaffold. Add the appBar into a Stack within the Scaffold's body. Add another Container to fill the screen to the Stack. Add all the components into that Container. That's it. You may now add background blur to the appBar and it works like a charm. Worked for me – GuyZ Mar 25 '19 at 14:24 ",
+                              textAlign: TextAlign.center,
+                              textScaleFactor: 0.8,
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
+                        )
                       ],
                     ).py(40),
                   ),

@@ -78,7 +78,7 @@ class CatalogItem extends StatelessWidget {
                   ButtonBar(
                     alignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      "\$${catalog.price}".text.xl.bold.make(),
+                      "\$${catalog.price}".text.xl3.bold.make(),
                       ElevatedButton(
                         style: ButtonStyle(
                           backgroundColor:
@@ -88,7 +88,7 @@ class CatalogItem extends StatelessWidget {
                           ),
                         ),
                         onPressed: () {},
-                        child: "Buy".text.white.make(),
+                        child: "Buy".text.size(0.01).white.make(),
                       ),
                     ],
                   ),
