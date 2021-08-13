@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_codepur/utils/routes.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -113,15 +114,40 @@ class _LoginPageState extends State<LoginPage> {
                             alignment: Alignment.center,
                             child: changeButton
                                 ? Icon(
-                                    Icons.done,
+                                    Icons.lock_open_sharp,
                                     color: Colors.white,
                                   )
-                                : Text(
-                                    "Login",
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 18),
+                                : Container(
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 20),
+                                          child: Text(
+                                            "Login",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 18),
+                                          ).keepAlive().objectCenter(),
+                                        ),
+                                        Container(
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Icon(
+                                                //MainAxisAlignment.end,
+                                                Icons.lock,
+                                                color: Colors.white,
+                                              ),
+                                            ],
+                                          ),
+                                        ).centered(),
+                                      ],
+                                    ),
                                   ),
                           ),
                         ),
