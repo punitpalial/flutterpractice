@@ -10,6 +10,13 @@ class CatalogModel {
   //         "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-12-pro-max-blue-hero?wid=940&hei=1112&fmt=png-alpha&.v=1604021658000",
   //   ),
   // ];
+
+  //Get item by ID
+  static Item getById(int id) =>
+      items.firstWhere((element) => element.id == id, orElse: null);
+
+  //Get Item by position
+  static Item getByPosition(int pos) => items[pos];
 }
 
 class Item {
