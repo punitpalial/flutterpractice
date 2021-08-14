@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_codepur/pages/home_detail_page.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class MyDrawer extends StatelessWidget {
   const MyDrawer({Key? key}) : super(key: key);
@@ -14,15 +16,49 @@ class MyDrawer extends StatelessWidget {
         children: [
           DrawerHeader(
             padding: EdgeInsets.zero,
-            child: UserAccountsDrawerHeader(
-              margin: EdgeInsets.zero,
-              decoration: BoxDecoration(
-                color: Colors.black87,
-              ),
-              accountName: Text("Punit Palial"),
-              accountEmail: Text("punit.palial@gmail.com"),
-              currentAccountPicture: CircleAvatar(
-                backgroundImage: NetworkImage(imageUrl),
+            child: Container(
+              color: Colors.black,
+              child: Column(
+                //margin: EdgeInsets.zero,
+                //decoration: BoxDecoration(
+                //color: Colors.black,
+                //),
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      children: [
+                        CircleAvatar(
+                          radius: 45,
+                          backgroundImage: NetworkImage(imageUrl),
+                        ),
+                      ],
+                    ),
+                  ),
+                  //accountName:
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Punit Palial",
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "punit.palial@gmail.com",
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ),
           ),

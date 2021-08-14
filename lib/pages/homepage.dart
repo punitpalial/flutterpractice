@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_application_codepur/models/catalog.dart';
 import 'package:flutter_application_codepur/utils/routes.dart';
+import 'package:flutter_application_codepur/widgets/drawer.dart';
 import 'package:flutter_application_codepur/widgets/home_widgets/catalog_header.dart';
 import 'package:flutter_application_codepur/widgets/home_widgets/catalog_list.dart';
 import 'package:flutter_application_codepur/widgets/themes.dart';
@@ -44,7 +45,7 @@ class _HomepageState extends State<Homepage> {
   Widget build(BuildContext context) {
     //ab dummy ke 50 iphone ki zarurat nahi:=> // final dummyList = List.generate(50, (index) => CatalogModel.items[0]);
     return Scaffold(
-      backgroundColor: MyTheme.creamColor,
+      backgroundColor: context.canvasColor,
 
       bottomNavigationBar: Container(
         color: Colors.transparent,
@@ -52,7 +53,7 @@ class _HomepageState extends State<Homepage> {
           //alignment: Alignment.bottomRight,
 
           child: Padding(
-            padding: const EdgeInsets.only(bottom: 4.0),
+            padding: const EdgeInsets.only(bottom: 0),
             child: FloatingActionButton(
               onPressed: () => Navigator.pushNamed(context, MyRoutes.cartRoute),
               backgroundColor: Colors.black,
@@ -127,9 +128,10 @@ class _HomepageState extends State<Homepage> {
       //           child: CircularProgressIndicator(),
       //         ),
       // ),
-      // drawer: MyDrawer(),
+      drawer: MyDrawer(),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
+        iconTheme: context.theme.appBarTheme.iconTheme,
       ),
       body: SafeArea(
         child: Container(

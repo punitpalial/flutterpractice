@@ -21,9 +21,9 @@ class HomeDetailPage extends StatelessWidget {
           center: Alignment(-0, -1.5),
           colors: [
             Color.fromRGBO(255, 255, 255, 1),
-            Color.fromRGBO(56, 56, 56, 1),
+            Color.fromRGBO(50, 50, 50, 1),
           ],
-          radius: 2.7,
+          radius: 2.5,
         ),
       ),
       child: Scaffold(
@@ -51,7 +51,7 @@ class HomeDetailPage extends StatelessWidget {
                 child: "Buy".text.xl2.white.make(),
               ).wh(150, 50),
             ],
-          ).px(32).py(10),
+          ).px(32),
         ),
         body: SafeArea(
           bottom: false,
@@ -59,16 +59,14 @@ class HomeDetailPage extends StatelessWidget {
             children: [
               Center(
                 child: Container(
-                        height: 350,
-                        //width: 300,
-                        //width: context.screenWidth,
-                        child: Hero(
-                            tag: Key(catalog.id.toString()),
-                            child: Image.network(catalog.image)))
-                    .box
-                    .roundedFull
-                    .color(Colors.white)
-                    .make(),
+                  height: 260,
+                  //width: 300,
+                  //width: context.screenWidth,
+                  child: Hero(
+                    tag: Key(catalog.id.toString()),
+                    child: Image.network(catalog.image),
+                  ),
+                ).box.roundedFull.color(Colors.white).make(),
                 //.px64(),
               ).px16(),
               // Padding(
